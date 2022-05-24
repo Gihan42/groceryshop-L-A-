@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="itemContext" prefHeight="445.0" prefWidth="748.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ItemController">
+   <children>
+      <TabPane prefHeight="419.0" prefWidth="745.0" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="Save Item">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="359.0" prefWidth="745.0">
+                     <children>
+                        <AnchorPane layoutX="26.0" layoutY="124.0" prefHeight="218.0" prefWidth="694.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;">
+                           <children>
+                              <Label layoutX="6.0" layoutY="34.0" text="Code :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="4.0" layoutY="123.0" text="Unit Price :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="6.0" layoutY="76.0" text="Pack Size :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.0" layoutX="26.0" layoutY="-10.0" stroke="#a89f9f" strokeType="INSIDE" width="161.0" />
+                              <Label layoutX="45.0" layoutY="-13.0" prefHeight="11.0" prefWidth="132.0" text="Item" textFill="#084267">
+                                 <font>
+                                    <Font name="System Bold Italic" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="312.0" layoutY="33.0" text="Description :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="312.0" layoutY="77.0" text="Qty On Hand :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btnItemSave1" layoutX="501.0" layoutY="167.0" mnemonicParsing="false" onAction="#ItemSaveOnAction" prefHeight="30.0" prefWidth="159.0" style="-fx-background-radius: 20; -fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20;" text="+ Add New" textFill="#0a348d">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <JFXTextField fx:id="tstSaveItemCode1" focusColor="#01040d" layoutX="63.0" layoutY="31.0" prefHeight="25.0" prefWidth="184.0" promptText="I00-001" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtSavePackSize1" focusColor="#01040d" layoutX="92.0" layoutY="75.0" prefHeight="25.0" prefWidth="201.0" promptText="size" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtSaveItemUnitPrice1" focusColor="#01040d" layoutX="101.0" layoutY="120.0" prefHeight="25.0" prefWidth="184.0" promptText="Rs.00.00" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtSaveItemDescription1" focusColor="#01040d" layoutX="415.0" layoutY="31.0" prefHeight="25.0" prefWidth="235.0" promptText="description" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtSaveItemQtyOnHand1" focusColor="#01040d" layoutX="423.0" layoutY="75.0" prefHeight="25.0" prefWidth="237.0" promptText="qty" unFocusColor="#1248d2" />
+                              <Label layoutX="312.0" layoutY="123.0" text="Item Discount :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="txtSaveItemDiscount" focusColor="#01040d" layoutX="423.0" layoutY="121.0" prefHeight="25.0" prefWidth="43.0" promptText="00" unFocusColor="#1248d2" />
+                              <Label layoutX="466.0" layoutY="121.0" prefHeight="24.0" prefWidth="28.0" text="\%">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="298.0" layoutY="14.0" prefHeight="43.0" prefWidth="193.0" text="Save Item" textFill="#0e4588">
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutX="139.0" layoutY="56.0" prefHeight="0.0" prefWidth="495.0" style="-fx-border-color: gray;" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Update And Search Item">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="375.0" prefWidth="745.0">
+                     <children>
+                        <AnchorPane layoutX="26.0" layoutY="124.0" prefHeight="218.0" prefWidth="694.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;">
+                           <children>
+                              <Label layoutX="6.0" layoutY="34.0" text="Code :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="4.0" layoutY="123.0" text="Unit Price :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="6.0" layoutY="76.0" text="Pack Size :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.0" layoutX="26.0" layoutY="-10.0" stroke="#a89f9f" strokeType="INSIDE" width="161.0" />
+                              <Label layoutX="45.0" layoutY="-13.0" prefHeight="11.0" prefWidth="132.0" text="Item" textFill="#084267">
+                                 <font>
+                                    <Font name="System Bold Italic" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="312.0" layoutY="33.0" text="Description :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="312.0" layoutY="77.0" text="Qty On Hand :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btnUpdateItem" layoutX="473.0" layoutY="174.0" mnemonicParsing="false" onAction="#UpdateItemOnAction" prefHeight="30.0" prefWidth="159.0" style="-fx-background-radius: 20; -fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20;" text="Update" textFill="#0a348d">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <JFXTextField fx:id="txtUpdateItemCode" focusColor="#01040d" layoutX="63.0" layoutY="31.0" prefHeight="25.0" prefWidth="184.0" promptText="I00-001" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtUpdateItemPackSize" focusColor="#01040d" layoutX="92.0" layoutY="75.0" prefHeight="25.0" prefWidth="201.0" promptText="size" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtUpdateUnitiPrice" focusColor="#01040d" layoutX="101.0" layoutY="120.0" prefHeight="25.0" prefWidth="184.0" promptText="Rs.00.00" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtUpdateItemDescription" focusColor="#01040d" layoutX="415.0" layoutY="31.0" prefHeight="25.0" prefWidth="235.0" promptText="description" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtUpdateQtyONHand" focusColor="#01040d" layoutX="423.0" layoutY="75.0" prefHeight="25.0" prefWidth="237.0" promptText="qty" unFocusColor="#1248d2" />
+                              <Label layoutX="312.0" layoutY="122.0" text="Item Discount :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="txtUpdateItemDiscount" focusColor="#01040d" layoutX="423.0" layoutY="120.0" prefHeight="25.0" prefWidth="49.0" promptText="00" unFocusColor="#1248d2" />
+                              <Label layoutX="473.0" layoutY="125.0" prefHeight="24.0" prefWidth="28.0" text="\%">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="277.0" layoutY="14.0" prefHeight="43.0" prefWidth="238.0" text="Update &amp; Search " textFill="#0e4588">
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutX="139.0" layoutY="56.0" prefHeight="0.0" prefWidth="495.0" style="-fx-border-color: gray;" />
+                        <TextField fx:id="txtSearchItem" layoutX="178.0" layoutY="73.0" onAction="#txtSearchItemOnAction" onKeyReleased="#textFields_Key_Released_Meals" prefHeight="30.0" prefWidth="437.0" promptText="🔍 Serch Item" style="-fx-background-radius: 20; -fx-border-color: #155088; -fx-background-radius: 20; -fx-border-radius: 20;">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </TextField>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+          <Tab text="Delete Item">
+               <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="359.0" prefWidth="745.0">
+                     <children>
+                        <AnchorPane layoutX="26.0" layoutY="124.0" prefHeight="218.0" prefWidth="694.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;">
+                           <children>
+                              <Label layoutX="6.0" layoutY="34.0" text="Code :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="4.0" layoutY="123.0" text="Unit Price :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="6.0" layoutY="76.0" text="Pack Size :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.0" layoutX="26.0" layoutY="-10.0" stroke="#a89f9f" strokeType="INSIDE" width="161.0" />
+                              <Label layoutX="45.0" layoutY="-13.0" prefHeight="11.0" prefWidth="132.0" text="Item" textFill="#084267">
+                                 <font>
+                                    <Font name="System Bold Italic" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="312.0" layoutY="33.0" text="Description :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="312.0" layoutY="77.0" text="Qty On Hand :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btnItemSave" layoutX="501.0" layoutY="174.0" mnemonicParsing="false" onAction="#ItemDeleteOnAction" prefHeight="30.0" prefWidth="159.0" style="-fx-background-radius: 20; -fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20;" text="Delete" textFill="#0a348d">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <JFXTextField fx:id="tstDeletedCode" focusColor="#01040d" layoutX="63.0" layoutY="31.0" onAction="#DeleteSOnAction" prefHeight="25.0" prefWidth="184.0" promptText="I00-001" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtDeletePackSize" focusColor="#01040d" layoutX="92.0" layoutY="75.0" prefHeight="25.0" prefWidth="201.0" promptText="size" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtDeleteItemUnitPrice" focusColor="#01040d" layoutX="101.0" layoutY="120.0" prefHeight="25.0" prefWidth="184.0" promptText="Rs.00.00" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtDeletetemDescription" focusColor="#01040d" layoutX="415.0" layoutY="31.0" prefHeight="25.0" prefWidth="235.0" promptText="description" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtDeletetemQtyOnHand" focusColor="#01040d" layoutX="423.0" layoutY="75.0" prefHeight="25.0" prefWidth="237.0" promptText="qty" unFocusColor="#1248d2" />
+                              <Label layoutX="309.0" layoutY="123.0" text="Item Discount :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="txtDeletetemDisount" focusColor="#01040d" layoutX="430.0" layoutY="121.0" prefHeight="25.0" prefWidth="49.0" promptText="00" unFocusColor="#1248d2" />
+                              <Label layoutX="479.0" layoutY="121.0" prefHeight="24.0" prefWidth="28.0" text="\%">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="298.0" layoutY="14.0" prefHeight="43.0" prefWidth="193.0" text="Delete Item" textFill="#0e4588">
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutX="139.0" layoutY="56.0" prefHeight="0.0" prefWidth="495.0" style="-fx-border-color: gray;" />
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+            <Tab text="Load All Item">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="359.0" prefWidth="745.0">
+                     <children>
+                        <Label layoutX="328.0" layoutY="13.0" prefHeight="43.0" prefWidth="118.0" text="All Items" textFill="#0e4588">
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutX="139.0" layoutY="56.0" prefHeight="0.0" prefWidth="495.0" style="-fx-border-color: gray;" />
+                        <TableView fx:id="tblItem" layoutX="22.0" layoutY="95.0" prefHeight="258.0" prefWidth="714.0" style="-fx-border-color: white;">
+                          <columns>
+                            <TableColumn fx:id="colCode" prefWidth="115.0" text="code" />
+                              <TableColumn fx:id="colDescription" prefWidth="161.0" text="description" />
+                              <TableColumn fx:id="colPackSize" prefWidth="78.0" text="pack size" />
+                              <TableColumn fx:id="colQtyOnHand" prefWidth="101.6666259765625" text="qtyOnHand" />
+                              <TableColumn fx:id="colUNITPRICE" prefWidth="136.66668701171875" text="unitPrice (RS)" />
+                              <TableColumn fx:id="colDiscount" prefWidth="136.66668701171875" text="discount(RS)" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Button fx:id="HomeBtn" layoutX="-1.0" layoutY="412.0" mnemonicParsing="false" onAction="#HomeButtonOnAction" prefHeight="38.0" prefWidth="748.0" style="-fx-background-color: #0e4588;" text="🏠     Home" textFill="#efefef">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

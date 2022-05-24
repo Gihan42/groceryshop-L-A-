@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="MainContext" prefHeight="347.0" prefWidth="546.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainFormController">
+   <children>
+      <ImageView fitHeight="142.0" fitWidth="141.0" layoutX="92.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assests/external-admin-marketing-seo-phatplus-lineal-phatplus.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="175.0" fitWidth="160.0" layoutX="295.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assests/240_F_338099978_AI1TZ520242U90ucQDuBs9ZUUFW0GIHH.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="99.0" layoutY="113.0" mnemonicParsing="false" onAction="#btnAdministratorOnAction" opacity="0.0" prefHeight="166.0" prefWidth="153.0" text="Button1">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="299.0" layoutY="113.0" mnemonicParsing="false" onAction="#btnCashierOnAction" opacity="0.0" prefHeight="166.0" prefWidth="153.0" text="Button2">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="119.0" layoutY="286.0" prefHeight="24.0" prefWidth="114.0" text="Administrator">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="362.0" layoutY="286.0" prefHeight="24.0" prefWidth="64.0" text="Cashier">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="242.0" layoutY="2.0" prefHeight="25.0" prefWidth="88.0" text="welcome">
+         <font>
+            <Font name="Berlin Sans FB" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="185.0" layoutY="39.0" text="Grocery  Shop" textFill="#054f84">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <Separator layoutX="99.0" layoutY="85.0" prefHeight="0.0" prefWidth="374.0" />
+   </children>
+</AnchorPane>

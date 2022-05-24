@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="customerContext" prefHeight="496.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerFormController">
+   <children>
+      <TabPane layoutX="11.0" layoutY="6.0" prefHeight="449.0" prefWidth="720.0" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Save Customer">
+               <content>
+                  <AnchorPane fx:id="Save11" cache="true" cacheHint="SCALE" minHeight="0.0" minWidth="0.0" prefHeight="379.0" prefWidth="720.0" style="-fx-background-color: white;">
+                     <children>
+                        <Separator layoutX="40.0" layoutY="60.0" prefHeight="0.0" prefWidth="482.0" style="-fx-border-color: gray;" />
+                        <Label layoutX="202.0" layoutY="24.0" text="Save Customer" textFill="#073d78">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <AnchorPane layoutX="13.0" layoutY="115.0" prefHeight="225.0" prefWidth="694.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;">
+                           <children>
+                              <Label layoutX="16.0" layoutY="33.0" text=" Id :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="122.0" text="City :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="6.0" layoutY="76.0" text=" Name :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.0" layoutX="26.0" layoutY="-10.0" stroke="#a89f9f" strokeType="INSIDE" width="161.0" />
+                              <Label layoutX="45.0" layoutY="-13.0" prefHeight="11.0" prefWidth="132.0" text="Customer" textFill="#084267">
+                                 <font>
+                                    <Font name="System Bold Italic" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="312.0" layoutY="33.0" text=" Title :- ">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="312.0" layoutY="77.0" text=" Address :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="312.0" layoutY="125.0" text="Province :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="174.0" text="Postal Code :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btnSave1111" layoutX="529.0" layoutY="179.0" mnemonicParsing="false" onAction="#SaveOnAction" prefHeight="30.0" prefWidth="159.0" style="-fx-background-radius: 20; -fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20;" text="+ Add New" textFill="#0a348d">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <JFXTextField fx:id="tstSaveCusId" focusColor="#01040d" layoutX="63.0" layoutY="31.0" prefHeight="25.0" prefWidth="184.0" promptText="C00-001" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtSaveCusName" focusColor="#01040d" layoutX="75.0" layoutY="75.0" prefHeight="25.0" prefWidth="184.0" promptText="name" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtSaveCustomerCity" focusColor="#01040d" layoutX="75.0" layoutY="123.0" prefHeight="25.0" prefWidth="184.0" promptText="city" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtSaveCustomerPostalCode" focusColor="#01040d" layoutX="111.0" layoutY="172.0" prefHeight="25.0" prefWidth="184.0" promptText="code" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtSaveCustomerTitle" focusColor="#01040d" layoutX="382.0" layoutY="31.0" prefHeight="25.0" prefWidth="184.0" promptText="Mr/Mrs" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtSaveCusAddress" focusColor="#01040d" layoutX="382.0" layoutY="75.0" prefHeight="25.0" prefWidth="278.0" promptText="address" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtSaveCustomerProvince" focusColor="#01040d" layoutX="392.0" layoutY="120.0" prefHeight="25.0" prefWidth="184.0" promptText="province" unFocusColor="#1248d2" />
+                           </children>
+                        </AnchorPane>
+                        <ImageView fitHeight="88.0" fitWidth="77.0" layoutX="637.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@assests/istockphoto-608001044-612x612.jpg" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="btnPlaceOrder" layoutX="646.0" layoutY="7.0" mnemonicParsing="false" onAction="#BtnPLaceOrderOnAction" opacity="0.0" prefHeight="58.0" prefWidth="59.0" style="-fx-border-color: black;" text="Button">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Label layoutX="646.0" layoutY="60.0" prefHeight="26.0" prefWidth="75.0" text="place order" textFill="#084267">
+                           <font>
+                              <Font name="System Bold Italic" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Search &amp; Update Customer">
+               <content>
+                  <AnchorPane fx:id="Save111" cache="true" cacheHint="SCALE" minHeight="0.0" minWidth="0.0" prefHeight="379.0" prefWidth="720.0" style="-fx-background-color: white;">
+                     <children>
+                        <Separator layoutX="119.0" layoutY="61.0" prefHeight="0.0" prefWidth="482.0" style="-fx-border-color: gray;" />
+                        <Label layoutX="266.0" layoutY="26.0" text="Search &amp; Update " textFill="#073d78">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <AnchorPane layoutX="13.0" layoutY="115.0" prefHeight="225.0" prefWidth="694.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;">
+                           <children>
+                              <Label layoutX="16.0" layoutY="33.0" text=" Id :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="122.0" text="City :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="6.0" layoutY="76.0" text=" Name :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.0" layoutX="26.0" layoutY="-10.0" stroke="#a89f9f" strokeType="INSIDE" width="161.0" />
+                              <Label layoutX="45.0" layoutY="-13.0" prefHeight="11.0" prefWidth="132.0" text="Customer" textFill="#084267">
+                                 <font>
+                                    <Font name="System Bold Italic" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="312.0" layoutY="33.0" text=" Title :- ">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="312.0" layoutY="77.0" text=" Address :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="312.0" layoutY="125.0" text="Province :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="174.0" text="Postal Code :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="txtUpdateCustomerId" focusColor="#01040d" layoutX="63.0" layoutY="31.0" onAction="#SearchCustomerOnAction" prefHeight="25.0" prefWidth="184.0" promptText="C00-001" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtUpdateCustomerName" focusColor="#01040d" layoutX="75.0" layoutY="75.0" prefHeight="25.0" prefWidth="184.0" promptText="name" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtUpdateCustomerPostalCode" focusColor="#01040d" layoutX="111.0" layoutY="172.0" prefHeight="25.0" prefWidth="184.0" promptText="code" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtUpdateCusTitle" focusColor="#01040d" layoutX="382.0" layoutY="31.0" prefHeight="25.0" prefWidth="184.0" promptText="Mr/Mrs" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtUpdateCustomerAddress" focusColor="#01040d" layoutX="382.0" layoutY="75.0" prefHeight="25.0" prefWidth="278.0" promptText="address" unFocusColor="#1248d2" />
+                              <Button fx:id="btnUpdate" layoutX="487.0" layoutY="179.0" mnemonicParsing="false" onAction="#UpddateOnAction" prefHeight="30.0" prefWidth="159.0" style="-fx-background-radius: 20; -fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20;" text="Update" textFill="#0a348d">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <JFXTextField fx:id="txtUpdateCustomerCity" focusColor="#01040d" layoutX="63.0" layoutY="120.0" prefHeight="25.0" prefWidth="184.0" promptText="city" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtUpdateCustomerProvince" focusColor="#01040d" layoutX="395.0" layoutY="120.0" prefHeight="25.0" prefWidth="184.0" promptText="province" unFocusColor="#1248d2" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Delete Customer">
+               <content>
+                  <AnchorPane fx:id="Save112" cache="true" cacheHint="SCALE" minHeight="0.0" minWidth="0.0" prefHeight="379.0" prefWidth="720.0" style="-fx-background-color: white;">
+                     <children>
+                        <Separator layoutX="119.0" layoutY="61.0" prefHeight="0.0" prefWidth="482.0" style="-fx-border-color: gray;" />
+                        <Label layoutX="281.0" layoutY="25.0" text="Delete Customer" textFill="#073d78">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <AnchorPane layoutX="13.0" layoutY="115.0" prefHeight="225.0" prefWidth="694.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black;">
+                           <children>
+                              <Label layoutX="16.0" layoutY="33.0" text=" Id :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="122.0" text="City :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="6.0" layoutY="76.0" text=" Name :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.0" layoutX="26.0" layoutY="-10.0" stroke="#a89f9f" strokeType="INSIDE" width="161.0" />
+                              <Label layoutX="45.0" layoutY="-13.0" prefHeight="11.0" prefWidth="132.0" text="Customer" textFill="#084267">
+                                 <font>
+                                    <Font name="System Bold Italic" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="312.0" layoutY="33.0" text=" Title :- ">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="312.0" layoutY="77.0" text=" Address :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="312.0" layoutY="125.0" text="Province :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="174.0" text="Postal Code :-">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btnDelete" layoutX="529.0" layoutY="179.0" mnemonicParsing="false" onAction="#DeleteOnAction" prefHeight="30.0" prefWidth="159.0" style="-fx-background-radius: 20; -fx-background-color: white; -fx-border-color: black; -fx-border-radius: 20;" text="Delete" textFill="#0a348d">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <JFXTextField fx:id="tstDeleteCusId1" focusColor="#01040d" layoutX="63.0" layoutY="31.0" onAction="#SearchDOnAction" prefHeight="25.0" prefWidth="184.0" promptText="C00-001" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtDeleteCusName1" focusColor="#01040d" layoutX="75.0" layoutY="75.0" prefHeight="25.0" prefWidth="184.0" promptText="name" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtDeleteCustomerCity1" focusColor="#01040d" layoutX="75.0" layoutY="123.0" prefHeight="25.0" prefWidth="184.0" promptText="city" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtDeleteCustomerPostalCode1" focusColor="#01040d" layoutX="111.0" layoutY="172.0" prefHeight="25.0" prefWidth="184.0" promptText="code" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtDeleteCustomerTitle1" focusColor="#01040d" layoutX="382.0" layoutY="31.0" prefHeight="25.0" prefWidth="184.0" promptText="Mr/Mrs" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtDeleteCusAddress1" focusColor="#01040d" layoutX="382.0" layoutY="75.0" prefHeight="25.0" prefWidth="278.0" promptText="address" unFocusColor="#1248d2" />
+                              <JFXTextField fx:id="txtDeleteCustomerProvince1" focusColor="#01040d" layoutX="392.0" layoutY="120.0" prefHeight="25.0" prefWidth="184.0" promptText="province" unFocusColor="#1248d2" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Load All Customer">
+               <content>
+                  <AnchorPane fx:id="Search11" minHeight="0.0" minWidth="0.0" prefHeight="427.0" prefWidth="715.0">
+                     <children>
+                        <TableView fx:id="tblCustomer1" layoutX="9.0" layoutY="83.0" prefHeight="307.0" prefWidth="702.0">
+                           <columns>
+                              <TableColumn fx:id="colId1" prefWidth="78.0" text="id" />
+                              <TableColumn fx:id="colTitle" prefWidth="87.0" text="Title" />
+                              <TableColumn fx:id="colName" prefWidth="116.0" text="Name" />
+                              <TableColumn fx:id="colAddress" prefWidth="144.0" text="Address" />
+                              <TableColumn fx:id="colCity" prefWidth="85.3333740234375" text="City" />
+                              <TableColumn fx:id="ColProvince" prefWidth="92.66668701171875" text="Province" />
+                              <TableColumn fx:id="colPostalCode" prefWidth="92.66668701171875" text="Postal Code" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="256.0" layoutY="21.0" prefHeight="40.0" prefWidth="240.0" text="Load All Customer" textFill="#073d78">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutX="138.0" layoutY="60.0" prefHeight="0.0" prefWidth="445.0" style="-fx-border-color: gray;" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <Button fx:id="HomeBtn" layoutX="-7.0" layoutY="461.0" mnemonicParsing="false" onAction="#HomeButtonOnAction" prefHeight="38.0" prefWidth="752.0" style="-fx-background-color: #0e4588;" text="🏠     Home" textFill="#efefef">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

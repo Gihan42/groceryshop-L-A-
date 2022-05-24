@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="loginContext" prefHeight="537.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginFormController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#114a80" height="543.0" layoutX="-6.0" stroke="BLACK" strokeType="INSIDE" width="267.0" />
+      <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="17.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assests/854878.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="17.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assests/3059997.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="17.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assests/4213179.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="31.0" fitWidth="31.0" layoutX="17.0" layoutY="352.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assests/2875435.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="31.0" layoutX="17.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@assests/2504957.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblAddress" layoutX="58.0" layoutY="168.0" text="196/Galle Road ,Weligama" textFill="#f8f3f3">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="60.0" layoutY="234.0" text="https://www.grocery/search " textFill="#6393c7">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblContact" layoutX="72.0" layoutY="299.0" text="041-456789 / 041-567456" textFill="#f8f3f3">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblEmail" layoutX="66.0" layoutY="358.0" text="groceryShop20@gmail.com" textFill="#f8f3f3">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblWhatsApp" layoutX="65.0" layoutY="422.0" prefHeight="20.0" prefWidth="126.0" text="+941-779090672" textFill="#f8f3f3">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Separator layoutX="2.0" layoutY="507.0" prefHeight="3.0" prefWidth="251.0" />
+      <Separator layoutX="30.0" layoutY="517.0" prefHeight="3.0" prefWidth="202.0" />
+      <Separator layoutX="52.0" layoutY="527.0" prefHeight="3.0" prefWidth="152.0" />
+      <Label layoutX="33.0" prefHeight="68.0" prefWidth="161.0" text="Grocery " textFill="#fff6f6">
+         <font>
+            <Font name="MT Extra" size="43.0" />
+         </font>
+      </Label>
+      <Label layoutX="106.0" layoutY="65.0" text="Shop" textFill="#fdfcfc">
+         <font>
+            <Font name="MS Outlook" size="32.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnlogin" layoutX="375.0" layoutY="368.0" mnemonicParsing="false" onAction="#loginOnaction" prefHeight="31.0" prefWidth="139.0" style="-fx-background-radius: 30; -fx-border-color: #152f48; -fx-border-radius: 30;" text="LOGIN" textFill="#152f48">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="341.0" layoutY="188.0" text="User Name" textFill="#152f48">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="345.0" layoutY="252.0" text="Password" textFill="#152f48">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtUserName" layoutX="345.0" layoutY="216.0" onKeyReleased="#textFields_Key_Released" prefHeight="25.0" prefWidth="346.0" promptText="Admin">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </JFXTextField>
+      <JFXPasswordField fx:id="pwdPassword" layoutX="345.0" layoutY="284.0" onAction="#EnterOnAction" onKeyReleased="#textFields_Key_Released" prefHeight="25.0" prefWidth="346.0" promptText="*********">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </JFXPasswordField>
+      <Label layoutX="397.0" layoutY="103.0" prefHeight="40.0" prefWidth="267.0" text=" Cashier Login Form" textFill="#152f48">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Separator layoutX="364.0" layoutY="143.0" prefHeight="3.0" prefWidth="300.0" />
+      <CheckBox fx:id="checkBtnShowpw" layoutX="341.0" layoutY="319.0" mnemonicParsing="false" onAction="#ShowPasswordOnAction" text="Show Password">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </CheckBox>
+      <Label fx:id="lblPercentage" layoutX="497.0" layoutY="420.0" prefHeight="26.0" prefWidth="50.0">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="TxtShowPw" layoutX="349.0" layoutY="284.0" prefHeight="25.0" prefWidth="346.0" visible="false" />
+      <Button fx:id="btnLogout" layoutX="540.0" layoutY="368.0" mnemonicParsing="false" onAction="#logoutOnAction" prefHeight="31.0" prefWidth="139.0" style="-fx-background-radius: 30; -fx-border-color: #152f48; -fx-border-radius: 30; -fx-background-color: #ff9933;" text="LOGOUT" textFill="#152f48">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ProgressBar fx:id="progresProses" layoutX="264.0" layoutY="519.0" prefHeight="20.0" prefWidth="489.0" progress="0.0" />
+   </children>
+</AnchorPane>
