@@ -11,6 +11,10 @@ import dao.custom.impl.CustomerDaoIMPL;
 import dao.custom.impl.ItemDaoImpl;
 import dao.custom.impl.OrderDaoImpl;
 import dao.custom.impl.OrderDetailsDoImpl;
+import entity.Customer;
+import entity.Item;
+import entity.Order;
+import entity.OrderDetail;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import dto.CustomerDto;
@@ -80,12 +84,14 @@ public class PurchOrderBoImpl implements PurchOrderBo {
 
     @Override
     public CustomerDto searchCustomer(String id) throws SQLException, ClassNotFoundException {
-        return dto.search(id);
+        Customer search = dto.search(id);
+        return  new CustomerDto(search.getId(),search.getCusTitle(),search.getName(),search.getAddress(),search.getCity(),search.getProvince(),search.getPostalCode());
     }
 
     @Override
     public ItemDto searchItem(String code) throws SQLException, ClassNotFoundException {
-        return itemDAO.search(code);
+        Item search = itemDAO.search(code);
+        return new ItemDto(search.getCode(),search.getDescription(),search.getPackSize(),search.getQtyOnhand(),search.getUnitPrice(),search.getDiscount());
     }
 
     @Override
@@ -105,23 +111,33 @@ public class PurchOrderBoImpl implements PurchOrderBo {
 
     @Override
     public ArrayList<CustomerDto> getAllCustomers() throws SQLException, ClassNotFoundException {
-        return dto.getAll();
+        ArrayList<CustomerDto>arrayList=new ArrayList<>();
+        ArrayList<Customer> all = dto.getAll();
+        for(Customer customer:all){
+            arrayList.add(new CustomerDto(customer.getId(),customer.getCusTitle(),customer.getName(),customer.getAddress(),customer.getCity(),customer.getProvince(),customer.getPostalCode()));
+        }
+        return arrayList;
     }
 
     @Override
     public ArrayList<ItemDto> getAllItems() throws SQLException, ClassNotFoundException {
-        return itemDAO.getAll();
+        ArrayList<ItemDto> allItem=new ArrayList<>();
+        ArrayList<Item> all = itemDAO.getAll();
+        for (Item item : all) {
+            allItem.add(new ItemDto(item.getCode(),item.getDescription(),item.getPackSize(),item.getQtyOnhand(),item.getUnitPrice(),item.getDiscount()));
+        }
+        return allItem;
     }
     @Override
     public boolean saveOrder(OrderDto dto) throws SQLException, ClassNotFoundException {
-        return orderDAO.save(dto);
+        return orderDAO.save(new Order(dto.getOid(),dto.getDate(),dto.getCustomerId(),dto.getTotal()));
     }
     @Override
     public boolean saveOrderDetails(ArrayList<OrderDetailsDto>details) throws SQLException, ClassNotFoundException {
 
         for (OrderDetailsDto data:details
              ) {
-            boolean isDetailsSave = orderDetailsDAO.save(data);
+            boolean isDetailsSave = orderDetailsDAO.save(new OrderDetail(data.getOid(),data.getItemCode(),data.getQty(),data.getTotalPrice()));
            if(isDetailsSave){
                boolean b =itemDAO.updateItemQty(data.getItemCode(), data.getQty());
                if(!b) {

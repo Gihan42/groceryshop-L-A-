@@ -20,4 +20,5 @@ public interface OrderBo extends SuperBo {
     public String genarateNewOrderId() throws SQLException, ClassNotFoundException;
 
     OrderDto search(String id)throws SQLException, ClassNotFoundException;
+
 }

@@ -3,6 +3,7 @@ package dao.custom.impl;
 import CrudUtil.CrudUtil;
 import dao.custom.OrderDetailsDo;
 import dto.OrderDetailsDto;
+import entity.OrderDetail;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 public class OrderDetailsDoImpl implements OrderDetailsDo {
 
     @Override
-    public boolean save(OrderDetailsDto dto) throws SQLException, ClassNotFoundException {
+    public boolean save(OrderDetail dto) throws SQLException, ClassNotFoundException {
      return  CrudUtil.executeUpdate("INSERT INTO orderdetails VALUES (?,?,?,?,?)",dto.getOid(),dto.getItemCode(),dto.getQty(),dto.getDiscount(),dto.getTotalPrice());
     }
 
@@ -26,10 +27,10 @@ public class OrderDetailsDoImpl implements OrderDetailsDo {
     }
 
     @Override
-    public OrderDetailsDto search(String oid) throws SQLException, ClassNotFoundException {
+    public OrderDetail search(String oid) throws SQLException, ClassNotFoundException {
         ResultSet resultSet = CrudUtil.executeQuery("SELECT * FROM orderdetails WHERE oid=?", oid);
         if(resultSet.next()){
-            return new OrderDetailsDto(
+            return new OrderDetail(
               resultSet.getString(1),
                     resultSet.getString(2),
                     resultSet.getInt(3),
@@ -41,14 +42,14 @@ public class OrderDetailsDoImpl implements OrderDetailsDo {
     }
 
     @Override
-    public ArrayList<OrderDetailsDto> getAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<OrderDetail> getAll() throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public boolean update(OrderDetailsDto dto) throws SQLException, ClassNotFoundException {
+    public boolean update(OrderDetail dto) throws SQLException, ClassNotFoundException {
       return  CrudUtil.executeUpdate("UPDATE orderdetails SET itemcode=? , qty=? , Discount=? , totalPrice=? WHERE oid=?",
-              dto.getItemCode(),dto.getQty(),dto.getDiscount(),dto.getOid(),dto.getTotalPrice());
+              dto.getItemCode(),dto.getQty(),dto.getDiscount(),dto.getTotalPrice(),dto.getOid());
     }
 
     @Override

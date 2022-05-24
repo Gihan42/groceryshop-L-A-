@@ -1,6 +1,11 @@
 package controller;
 
 import TM.OrderTm;
+import bo.custom.OrderBo;
+import bo.custom.OrderDetailsBo;
+import bo.custom.bo.BOFactory;
+import bo.custom.impl.OrderBoImpl;
+import bo.custom.impl.OrderDetailsBoImpl;
 import com.jfoenix.controls.JFXTextField;
 import dao.DAOFactory;
 import dao.custom.OrderDao;
@@ -51,8 +56,10 @@ public class MangeOrderFormController {
     public TextField txtSearchCustomerOrder;
 
 
-    OrderDetailsDo orderDetailsDo= (OrderDetailsDo) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDERDETAILS);
-    OrderDao orderDao=new OrderDaoImpl();
+      OrderDetailsBo orderDetailsDo= (OrderDetailsBo) BOFactory.getBoFactory().getBo(BOFactory.BoTypes.ORDERDETAILS);
+//    OrderDetailsDo orderDetailsDo= (OrderDetailsDo) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDERDETAILS);
+     OrderBo orderDao= (OrderBo) BOFactory.getBoFactory().getBo(BOFactory.BoTypes.ORDERDETAILS);
+
     public void initialize(){
        colIrderId.setCellValueFactory(new PropertyValueFactory<>("oid"));
         ColDate.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -73,7 +80,7 @@ public class MangeOrderFormController {
         double discount=Double.parseDouble( txtUpdateItemDiscount.getText()) ;
         double total= Double.parseDouble(txtUpdateTotal.getText());
         try {
-            orderDetailsDo.update(new OrderDetailsDto(
+            orderDetailsDo.updateOrderdetails( new OrderDetailsDto(
                     OrderCode,ItemCode,qty,discount,total
             ));
             new Alert(Alert.AlertType.CONFIRMATION,"Order Updated").show();
@@ -103,7 +110,7 @@ public class MangeOrderFormController {
     }
     public void RemoveOrderDetailsOnAction(ActionEvent actionEvent) {
         try {
-            orderDao.delete(txtSearchRemoveOrderId.getText());
+            orderDao.deleteOrder(txtSearchRemoveOrderId.getText());
             new Alert(Alert.AlertType.CONFIRMATION,"Remove Order").show();
             txtRemoveOrerCode1.clear();
             txtRemoveCustomerCode.clear();
@@ -131,7 +138,7 @@ public class MangeOrderFormController {
     public void txtSearchOrderCusIdOnAction(ActionEvent actionEvent) {
         tblSearchOrders.getItems().clear();
         try {
-            ArrayList<OrderDto> allOrder = orderDao.getAllOrdersByCusId(txtSearchCustomerOrder.getText());
+            ArrayList<OrderDto> allOrder = orderDetailsDo.getAllOrdersByCusId(txtSearchCustomerOrder.getText());
             for (OrderDto dto:allOrder
             ) {
                 tblSearchOrders.getItems().add(new OrderTm(dto.getOid(),dto.getDate(),dto.getCustomerId()));
@@ -141,6 +148,9 @@ public class MangeOrderFormController {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+    private void calculateqty(){
+      int qty= Integer.parseInt(txtUpdateQty.getText()) ;
 
     }
 }

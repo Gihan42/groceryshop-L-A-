@@ -3,6 +3,7 @@ package dao.custom.impl;
 import CrudUtil.CrudUtil;
 import dao.custom.CustomerDao;
 import dto.CustomerDto;
+import entity.Customer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 
 public class CustomerDaoIMPL implements CustomerDao {
     @Override
-    public boolean save(CustomerDto dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Customer dto) throws SQLException, ClassNotFoundException {
        return CrudUtil.executeUpdate("INSERT INTO Customer VALUES(?,?,?,?,?,?,?)",
                 dto.getId(),dto.getCusTitle(),dto.getName(),dto.getAddress(),dto.getCity(),dto.getProvince(),dto.getPostalCode());
     }
@@ -26,10 +27,10 @@ public class CustomerDaoIMPL implements CustomerDao {
     }
 
     @Override
-    public CustomerDto search(String id) throws SQLException, ClassNotFoundException {
+    public Customer search(String id) throws SQLException, ClassNotFoundException {
         ResultSet rst = CrudUtil.executeQuery("SELECT * FROM  Customer WHERE id=?", id);
         if(rst.next()){
-          return new CustomerDto(  rst.getString(1),
+          return new Customer(  rst.getString(1),
                   rst.getString(2),
                   rst.getString(3),
                   rst.getString(4),
@@ -41,11 +42,11 @@ public class CustomerDaoIMPL implements CustomerDao {
     }
 
     @Override
-    public ArrayList<CustomerDto> getAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Customer> getAll() throws SQLException, ClassNotFoundException {
         ResultSet rst = CrudUtil.executeQuery("SELECT * FROM Customer");
-        ArrayList<CustomerDto> allCustomer=new ArrayList<>();
+        ArrayList<Customer> allCustomer=new ArrayList<>();
         while(rst.next()){
-            allCustomer.add(new CustomerDto(rst.getString(1), rst.getString(2),
+            allCustomer.add(new Customer(rst.getString(1), rst.getString(2),
                     rst.getString(3), rst.getString(4), rst.getString(5),
                     rst.getString(6), rst.getString(7)));
         }
@@ -53,7 +54,7 @@ public class CustomerDaoIMPL implements CustomerDao {
     }
 
     @Override
-    public boolean update(CustomerDto dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Customer dto) throws SQLException, ClassNotFoundException {
        return CrudUtil.executeUpdate("UPDATE  Customer SET CusTitle=? , name=? ,  address=? , City=? , Province=? , PostalCode=? WHERE id=?",
                 dto.getCusTitle(), dto.getName(), dto.getAddress(), dto.getCity(), dto.getProvince(),
                               dto.getPostalCode(), dto.getId());

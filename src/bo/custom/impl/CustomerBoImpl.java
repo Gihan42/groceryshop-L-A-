@@ -6,6 +6,7 @@ import dao.DAOFactory;
 import dao.custom.CustomerDao;
 import dao.custom.impl.CustomerDaoIMPL;
 import dto.CustomerDto;
+import entity.Customer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,12 +20,17 @@ public class CustomerBoImpl implements CustomerBo {
     }
     @Override
     public ArrayList<CustomerDto> getAllCustomer() throws SQLException, ClassNotFoundException {
-      return  customerDao.getAll();
+        ArrayList<CustomerDto>arrayList=new ArrayList<>();
+        ArrayList<Customer> all = customerDao.getAll();
+         for(Customer customer:all){
+            arrayList.add(new CustomerDto(customer.getId(),customer.getCusTitle(),customer.getName(),customer.getAddress(),customer.getCity(),customer.getProvince(),customer.getPostalCode()));
+         }
+         return arrayList;
     }
 
     @Override
     public boolean saveCustomer(CustomerDto dto) throws SQLException, ClassNotFoundException {
-       return customerDao.save(dto);
+       return customerDao.save(new Customer(dto.getId(),dto.getCusTitle(),dto.getName(), dto.getAddress(),dto.getCity(),dto.getProvince(),dto.getPostalCode()));
     }
 
     @Override
@@ -34,7 +40,7 @@ public class CustomerBoImpl implements CustomerBo {
 
     @Override
     public boolean updateCustomer(CustomerDto dto) throws SQLException, ClassNotFoundException {
-        return customerDao.update(dto);
+        return customerDao.update(new Customer(dto.getId(),dto.getCusTitle(),dto.getName(), dto.getAddress(),dto.getCity(),dto.getProvince(),dto.getPostalCode()));
     }
 
     @Override
@@ -47,17 +53,8 @@ public class CustomerBoImpl implements CustomerBo {
         return null;
     }
     public CustomerDto search(String id) throws SQLException, ClassNotFoundException {
-        ResultSet rst = CrudUtil.executeQuery("SELECT * FROM  Customer WHERE id=?", id);
-        if(rst.next()){
-            return new CustomerDto(  rst.getString(1),
-                    rst.getString(2),
-                    rst.getString(3),
-                    rst.getString(4),
-                    rst.getString(5),
-                    rst.getString(6),
-                    rst.getString(7));
-        }
-        return null;
+        Customer search = customerDao.search(id);
+        return  new CustomerDto(search.getId(),search.getCusTitle(),search.getName(),search.getAddress(),search.getCity(),search.getProvince(),search.getPostalCode());
     }
 
 }

@@ -86,7 +86,7 @@ public class SystemReportFormController {
         tblDaileIncomeTable.getItems().clear();
         LocalDate date = datePicker.getValue();
         try {
-            ArrayList<OrderDto> allOrders = orderDao.getAllOrderByDaily(String.valueOf(date));
+            ArrayList<OrderDto> allOrders = systemReportBo.getAllOrderByDaily(String.valueOf(date));
             for (OrderDto order : allOrders
             ) {
                 tblDaileIncomeTable.getItems().add(new OrderDailyTm(

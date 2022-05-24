@@ -3,6 +3,7 @@ package dao.custom.impl;
 import CrudUtil.CrudUtil;
 import dao.custom.ItemDao;
 import dto.ItemDto;
+import entity.Item;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 
 public class ItemDaoImpl implements ItemDao {
     @Override
-    public boolean save(ItemDto dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Item dto) throws SQLException, ClassNotFoundException {
      return CrudUtil.executeUpdate("INSERT INTO item VALUES(?,?,?,?,?,?)",dto.getCode(),dto.getDescription(),
                 dto.getPackSize(),dto.getQtyOnhand(),dto.getUnitPrice(),dto.getDiscount());
     }
@@ -26,10 +27,10 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
-    public ItemDto search(String id) throws SQLException, ClassNotFoundException {
+    public Item search(String id) throws SQLException, ClassNotFoundException {
         ResultSet resultSet = CrudUtil.executeQuery("SELECT * FROM item WHERE code=?", id);
         if(resultSet.next()){
-            return new ItemDto(
+            return new Item(
                     resultSet.getString(1),
                     resultSet.getString(2),
                     resultSet.getString(3),
@@ -42,11 +43,11 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
-    public ArrayList<ItemDto> getAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Item> getAll() throws SQLException, ClassNotFoundException {
         ResultSet rst = CrudUtil.executeQuery("SELECT * FROM item");
-        ArrayList<ItemDto> allItem=new ArrayList<>();
+        ArrayList<Item> allItem=new ArrayList<>();
         while(rst.next()){
-            allItem.add(new ItemDto(
+            allItem.add(new Item(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -59,7 +60,7 @@ public class ItemDaoImpl implements ItemDao {
     }
 
     @Override
-    public boolean update(ItemDto dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Item dto) throws SQLException, ClassNotFoundException {
     return  CrudUtil.executeUpdate("UPDATE  item SET description=? , PackSize=? , qtyOnHand=? , unitPrice=? , discount=? WHERE code=?",
         dto.getDescription(),dto.getPackSize(),dto.getQtyOnhand(),dto.getUnitPrice(),dto.getDiscount(),dto.getCode());
     }

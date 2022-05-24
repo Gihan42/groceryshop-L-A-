@@ -2,6 +2,7 @@ package bo.custom;
 
 import bo.custom.bo.SuperBo;
 import dto.OrderDetailsDto;
+import dto.OrderDto;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,4 +21,6 @@ public interface OrderDetailsBo extends SuperBo {
     public String genarateNewOrderCode() throws SQLException, ClassNotFoundException;
 
     OrderDetailsDto search(String id)throws SQLException, ClassNotFoundException;
+
+    public ArrayList<OrderDto> getAllOrdersByCusId(String id)throws SQLException, ClassNotFoundException;
 }
