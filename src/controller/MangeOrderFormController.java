@@ -1,17 +1,21 @@
 package controller;
 
 import TM.OrderTm;
+import bo.custom.ItemBo;
 import bo.custom.OrderBo;
 import bo.custom.OrderDetailsBo;
 import bo.custom.bo.BOFactory;
 import bo.custom.impl.OrderBoImpl;
 import bo.custom.impl.OrderDetailsBoImpl;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import dao.DAOFactory;
 import dao.custom.OrderDao;
 import dao.custom.OrderDetailsDo;
 import dao.custom.impl.OrderDaoImpl;
 import dao.custom.impl.OrderDetailsDoImpl;
+import dto.CustomerDto;
+import dto.ItemDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -54,16 +58,20 @@ public class MangeOrderFormController {
     public TableColumn ColDate;
     public TableColumn ColCustomerId;
     public TextField txtSearchCustomerOrder;
+    public JFXTextField txtunitprice;
+    public JFXComboBox CMBoRDERiD;
 
 
-      OrderDetailsBo orderDetailsDo= (OrderDetailsBo) BOFactory.getBoFactory().getBo(BOFactory.BoTypes.ORDERDETAILS);
+    OrderDetailsBo orderDetailsDo= (OrderDetailsBo) BOFactory.getBoFactory().getBo(BOFactory.BoTypes.ORDERDETAILS);
 //    OrderDetailsDo orderDetailsDo= (OrderDetailsDo) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDERDETAILS);
-     OrderBo orderDao= (OrderBo) BOFactory.getBoFactory().getBo(BOFactory.BoTypes.ORDERDETAILS);
-
+     OrderBo orderDao= (OrderBo) BOFactory.getBoFactory().getBo(BOFactory.BoTypes.ORDER);
+    ItemBo itemBo= (ItemBo) BOFactory.getBoFactory().getBo(BOFactory.BoTypes.ITEM);
     public void initialize(){
        colIrderId.setCellValueFactory(new PropertyValueFactory<>("oid"));
         ColDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         ColCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+      //  claculateQty();
+
     }
     public void HomeButtonOnAction(ActionEvent actionEvent) throws IOException {
         setUI("CashierForm");
@@ -79,6 +87,8 @@ public class MangeOrderFormController {
         int qty= Integer.parseInt(txtUpdateQty.getText());
         double discount=Double.parseDouble( txtUpdateItemDiscount.getText()) ;
         double total= Double.parseDouble(txtUpdateTotal.getText());
+
+
         try {
             orderDetailsDo.updateOrderdetails( new OrderDetailsDto(
                     OrderCode,ItemCode,qty,discount,total
@@ -149,8 +159,21 @@ public class MangeOrderFormController {
             e.printStackTrace();
         }
     }
-    private void calculateqty(){
-      int qty= Integer.parseInt(txtUpdateQty.getText()) ;
+   /* private void claculateQty(){
+        double unitprice=Double.parseDouble(txtunitprice.getText());
+        int qty= Integer.parseInt(txtQty.getText());
+        double total=Double.parseDouble(txtUpdateTotal.getText())-unitprice;
+        try {
+                ItemDto search = itemBo.search(txtItemCode.getText());
+                txtunitprice.setText(String.valueOf(search.getUnitPrice()));
+                txtUpdateTotal.setText(String.valueOf(total));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
-    }
+
+    }*/
+
 }

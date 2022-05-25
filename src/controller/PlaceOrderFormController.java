@@ -34,6 +34,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class PlaceOrderFormController {
     public AnchorPane placeOrderContext;
@@ -152,13 +154,7 @@ public class PlaceOrderFormController {
             CalculateTotal();
     }
     public void btnPlaceOrder_OnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
-      /*  boolean b = saveOrder(lblOrderId.getText(), LocalDate.now(), cmbCustomerId.getValue());
-        if (b) {
-            new Alert(Alert.AlertType.INFORMATION, "Order has been placed successfully").show();
-        } else {
-            new Alert(Alert.AlertType.ERROR, "Order has not been placed successfully").show();
-        }*/
-        OrderDto order=new OrderDto(
+      /*  OrderDto order=new OrderDto(
                 orderId,
                 lblDate.getText(),
                 cmbCustomerId.getValue(),
@@ -200,6 +196,27 @@ public class PlaceOrderFormController {
         }finally {
             connection.setAutoCommit(true);
         }
+*/
+        double discount=Double.parseDouble(txtDiscount.getText());
+        String oId = lblOrderId.getText();
+        String cId = cmbCustomerId.getValue();
+        String date = "2022-05-14";
+        OrderDto orderDTO = new OrderDto(oId,date,cId,Double.parseDouble(lblTotal.getText()));
+        ArrayList<OrderDetailsDto> dtoLst = new ArrayList<>();
+        for (CartTm tdm : tmList) {
+            dtoLst.add(new OrderDetailsDto(oId,tdm.getCode(), tdm.getQty(), discount, tdm.getTotal()));
+
+        }
+        try {
+            if(purchaseOrderBO.purchaseOrder(orderDTO,dtoLst)){
+                new Alert(Alert.AlertType.INFORMATION,"order saved successfully!").show();
+                lblOrderId.setText(purchaseOrderBO.generateNewOrderID());
+                // refreshing the choose_item table
+                //loadItemsToChoose();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR,"order cannot be saved \n error : " + e.getMessage());
+        }
 
         orderId = generateNewOrderId();
         lblOrderId.setText( orderId);
@@ -208,9 +225,9 @@ public class PlaceOrderFormController {
 
     }
 
-   /* public boolean saveOrder(String orderId, LocalDate orderDate, String customerId) throws SQLException, ClassNotFoundException {
+  /*  public boolean saveOrder(String orderId, LocalDate orderDate, String customerId,double total, List<OrderDetailsDto> orderDetails) throws SQLException, ClassNotFoundException {
         try {
-            purchaseOrderBO.purchaseOrder(orderId, orderDate, customerId);
+            purchaseOrderBO.purchaseOrder(new OrderDto(orderId, orderDate, customerId,total,orderDetails));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -254,8 +271,6 @@ public class PlaceOrderFormController {
             }
         }
         return null;
-
-
     }
     private void CalculateTotal(){
         double total=0;
@@ -300,6 +315,7 @@ public class PlaceOrderFormController {
             cmbItemCode.getItems().add(dto.getCode());
         }
     }
+    }
 
 
-}
+

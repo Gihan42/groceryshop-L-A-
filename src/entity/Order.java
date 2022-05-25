@@ -1,5 +1,7 @@
 package entity;
 
+import java.time.LocalDate;
+
 public class Order {
     private String oid;
     private String date;
@@ -45,7 +47,7 @@ public class Order {
         this.total = total;
     }
 
-    public Order() {
+    public Order(String orderId, LocalDate orderDate, String customerId, double total) {
     }
 
     @Override

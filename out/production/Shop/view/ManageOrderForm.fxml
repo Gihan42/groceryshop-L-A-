@@ -83,7 +83,7 @@
                                  </font>
                               </Label>
                               <Separator layoutX="139.0" layoutY="56.0" prefHeight="0.0" prefWidth="495.0" style="-fx-border-color: gray;" />
-                              <TextField fx:id="txtSearchOrderId" layoutX="178.0" layoutY="73.0" onAction="#txtSearchItemOnAction" onKeyReleased="#textFields_Key_Released_Meals" prefHeight="30.0" prefWidth="437.0" promptText="🔍 Serch Order Id  OID-001" style="-fx-background-radius: 20; -fx-border-color: #155088; -fx-background-radius: 20; -fx-border-radius: 20;">
+                              <TextField fx:id="txtSearchOrderId" layoutX="207.0" layoutY="74.0" onAction="#txtSearchItemOnAction" onKeyReleased="#textFields_Key_Released_Meals" prefHeight="30.0" prefWidth="437.0" promptText="🔍 Serch Order Id  OID-001" style="-fx-background-radius: 20; -fx-border-color: #155088; -fx-background-radius: 20; -fx-border-radius: 20;">
                                  <font>
                                     <Font size="14.0" />
                                  </font>

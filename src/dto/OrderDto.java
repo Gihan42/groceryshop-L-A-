@@ -1,6 +1,7 @@
 package dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class OrderDto {
     private String oid;
@@ -8,6 +9,14 @@ public class OrderDto {
     private String customerId;
     private double total;
 
+   // List<OrderDetailsDto> orderDetails;
+    /*public List<OrderDetailsDto> getOrderDetails() {
+        return orderDetails;
+    }*/
+
+   /* public void setOrderDetails(List<OrderDetailsDto> orderDetails) {
+        this.orderDetails = orderDetails;
+    }*/
 
     public String getOid() {
         return oid;
@@ -48,8 +57,9 @@ public class OrderDto {
         this.total = total;
     }
 
-    public OrderDto() {
+    public OrderDto(String orderId, LocalDate orderDate, String customerId, double total, List<OrderDetailsDto> orderDetails) {
     }
+
 
     @Override
     public String toString() {

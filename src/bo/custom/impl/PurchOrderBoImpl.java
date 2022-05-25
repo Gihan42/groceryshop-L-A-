@@ -11,6 +11,7 @@ import dao.custom.impl.CustomerDaoIMPL;
 import dao.custom.impl.ItemDaoImpl;
 import dao.custom.impl.OrderDaoImpl;
 import dao.custom.impl.OrderDetailsDoImpl;
+import db.DBConnection;
 import entity.Customer;
 import entity.Item;
 import entity.Order;
@@ -21,7 +22,9 @@ import dto.CustomerDto;
 import dto.ItemDto;
 import dto.OrderDetailsDto;
 import dto.OrderDto;
+import javafx.scene.control.Alert;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -34,54 +37,30 @@ public class PurchOrderBoImpl implements PurchOrderBo {
     ObservableList<CartTm> tmList = FXCollections.observableArrayList();
 
     @Override
-    public boolean purchaseOrder(String orderId, LocalDate orderDate, String customerId) throws SQLException, ClassNotFoundException {
-        /*Transaction*/
-        //  Connection connection = DBConnection.getDbConnection().getConnection();
-        /*if order id already exist*/
-       /* if (orderDAO.exist(orderId)) {
-
-        }
+    public boolean purchaseOrder(OrderDto orderDTO, ArrayList<OrderDetailsDto> orderDetailDTO) throws SQLException, ClassNotFoundException {
+        Connection connection = DBConnection.getDbConnection().getConnection();
         connection.setAutoCommit(false);
-        boolean save = orderDAO.save(new OrderDto(orderId, orderDate, customerId));
+        boolean isOrderAdded = orderDAO.save(new Order(orderDTO.getOid(),orderDTO.getDate(),orderDTO.getCustomerId(),orderDTO.getTotal()));
 
-        if (!save) {
+        if(!isOrderAdded){
             connection.rollback();
             connection.setAutoCommit(true);
             return false;
         }
-
-        for (OrderDetailsDto detail : orderDetails) {
-            boolean save1 = orderDetailsDAO.save(detail);
-            if (!save1) {
-                connection.rollback();
-                connection.setAutoCommit(true);
-                return false;
-            }
-
-            //Search & Update Item
-//                ItemDTO item = findItem(detail.getItemCode());
-            ItemDto item = searchItem(detail.getItemCode());
-            item.setQtyOnhand((item.getQtyOnhand() - detail.getQty()));
-
-            //update item
-            System.out.println(item);
-            boolean update = itemDAO.update(item);
-
-            if (!update) {
+        for (OrderDetailsDto dto : orderDetailDTO) {
+            boolean isOderDetailsSaved = orderDetailsDAO.save(new OrderDetail(dto.getOid(),dto.getItemCode(),dto.getQty(),dto.getDiscount(),dto.getTotalPrice()));
+            itemDAO.updateItemQty(dto.getItemCode(),dto.getQty());
+            if (!isOderDetailsSaved){
                 connection.rollback();
                 connection.setAutoCommit(true);
                 return false;
             }
         }
+
         connection.commit();
         connection.setAutoCommit(true);
-        return true;*/
-
-        return false;
+        return true;
     }
-
-
-
     @Override
     public CustomerDto searchCustomer(String id) throws SQLException, ClassNotFoundException {
         Customer search = dto.search(id);
