@@ -8,11 +8,10 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import dto.CustomerDto;
@@ -20,6 +19,7 @@ import dto.CustomerDto;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class CustomerFormController {
     public Button btnSave;
@@ -75,7 +75,6 @@ public class CustomerFormController {
         colCity.setCellValueFactory(new PropertyValueFactory<>("City"));
         ColProvince.setCellValueFactory(new PropertyValueFactory<>("Province"));
         colPostalCode.setCellValueFactory(new PropertyValueFactory<>("PostalCode"));
-
     }
     public void SaveOnAction(ActionEvent actionEvent)  {
         String id = tstSaveCusId.getText();
@@ -85,6 +84,31 @@ public class CustomerFormController {
         String province=txtSaveCustomerProvince.getText();
         String postalCode=txtSaveCustomerPostalCode.getText();
         String city=txtSaveCustomerCity.getText();
+
+        if (!name.matches("[A-Za-z ]+")) {
+            new Alert(Alert.AlertType.ERROR, "Invalid name").show();
+            txtSaveCusName.requestFocus();
+            return;
+        } else if (!address.matches("^[A-z0-9 ,/]{4,20}$")) {
+            new Alert(Alert.AlertType.ERROR, "Address should be at least 3 characters long").show();
+            txtSaveCusAddress.requestFocus();
+            return;
+        }
+        else if(!id.matches(("^(C00-)[0-9]{3,5}$"))){
+            new Alert(Alert.AlertType.ERROR, "Id should be at least 3 characters long").show();
+            tstSaveCusId.requestFocus();
+            return;
+        }
+        else if(!city.matches("^[A-z]{1,10}")){
+            new Alert(Alert.AlertType.ERROR, "Please Check Again TextFeild City").show();
+            txtSaveCustomerCity.requestFocus();
+            return;
+        }
+        else if(!province.matches("^[A-z]{1,10}")){
+            new Alert(Alert.AlertType.ERROR, "Please Check Again TextFeild province").show();
+            txtSaveCustomerProvince.requestFocus();
+            return;
+        }
 
         boolean b= false;
         try {
@@ -138,6 +162,30 @@ public class CustomerFormController {
         String province=txtUpdateCustomerProvince.getText();
         String postalCode=txtUpdateCustomerPostalCode.getText();
         String city=txtUpdateCustomerCity.getText();
+        if (!name.matches("[A-Za-z ]+")) {
+            new Alert(Alert.AlertType.ERROR, "Invalid name").show();
+            txtSaveCusName.requestFocus();
+            return;
+        } else if (!address.matches("^[A-z0-9 ,/]{4,20}$")) {
+            new Alert(Alert.AlertType.ERROR, "Address should be at least 3 characters long").show();
+            txtSaveCusAddress.requestFocus();
+            return;
+        }
+        else if(!id.matches("^(C00-)[0-9]{3,5}$")){
+            new Alert(Alert.AlertType.ERROR, "Id should be at least 3 characters long").show();
+            tstSaveCusId.requestFocus();
+            return;
+        }
+        else if(!city.matches("^[A-z]{1,10}")){
+            new Alert(Alert.AlertType.ERROR, "Please Check Again TextFeild City").show();
+            txtUpdateCustomerCity.requestFocus();
+            return;
+        }
+        else if(!province.matches("^[A-z]{1,10}")){
+            new Alert(Alert.AlertType.ERROR, "Please Check Again TextFeild province").show();
+            txtUpdateCustomerProvince.requestFocus();
+            return;
+        }
         try {
           boolean b= customerBo.updateCustomer(new CustomerDto(id,title,name,address,city,province,postalCode));
           if(b){
@@ -157,19 +205,25 @@ public class CustomerFormController {
             search();
     }
     private void search() {
+        if(!txtUpdateCustomerId.getText().matches("^(C00-)[0-9]{3,5}$")){
+            new Alert(Alert.AlertType.ERROR, "Id should be at least 3 characters long").show();
+            tstSaveCusId.requestFocus();
+            return;
+        }
         CustomerDto search = null;
         try {
            boolean b= customerBo.existCustomer(txtUpdateCustomerId.getText());
             if(!b){
                 new Alert(Alert.AlertType.ERROR, " Please Check Id "+ txtUpdateCustomerId.getText()).show();
+            }else {
+                search = customerBo.search(txtUpdateCustomerId.getText());
+                txtUpdateCusTitle.setText(search.getCusTitle());
+                txtUpdateCustomerName.setText(search.getName());
+                txtUpdateCustomerAddress.setText(search.getAddress());
+                txtUpdateCustomerCity.setText(search.getCity());
+                txtUpdateCustomerProvince.setText(search.getProvince());
+                txtUpdateCustomerPostalCode.setText(search.getPostalCode());
             }
-            search = customerBo.search(txtUpdateCustomerId.getText());
-            txtUpdateCusTitle.setText(search.getCusTitle());
-            txtUpdateCustomerName.setText(search.getName());
-            txtUpdateCustomerAddress.setText(search.getAddress());
-            txtUpdateCustomerCity.setText(search.getCity());
-            txtUpdateCustomerProvince.setText(search.getProvince());
-            txtUpdateCustomerPostalCode.setText(search.getPostalCode());
         } catch (SQLException throwables) {
             new Alert(Alert.AlertType.WARNING, "Something Went Wrong Please Check Id").show();
             throwables.printStackTrace();
@@ -178,6 +232,11 @@ public class CustomerFormController {
         }
     }
     public void DeleteOnAction(ActionEvent actionEvent) {
+       if(!tstDeleteCusId1.getText().matches(("^(C00-)[0-9]{3,5}$"))){
+            new Alert(Alert.AlertType.ERROR, "Id should be at least 3 characters long").show();
+            tstSaveCusId.requestFocus();
+            return;
+        }
         try {
                 customerBo.deleteCustomer(tstDeleteCusId1.getText());
                 new Alert(Alert.AlertType.CONFIRMATION, "Customer Deleted").show();
@@ -209,19 +268,28 @@ public class CustomerFormController {
         else{
             new Alert(Alert.AlertType.WARNING, "Something Went Wrong Pleace Check Id").show();
         }*/
+        if(!tstDeleteCusId1.getText().matches(("^(C00-)[0-9]{3,5}$"))){
+            new Alert(Alert.AlertType.ERROR, "Id should be at least 3 characters long").show();
+            tstSaveCusId.requestFocus();
+            return;
+        }
         CustomerDto search = null;
         try {
-           boolean b= customerBo.existCustomer(tstDeleteCusId1.getText());
-            if(!b){
-                new Alert(Alert.AlertType.ERROR, " Please Check Id "+ tstDeleteCusId1.getText()).show();
+            if(!existCustomer(tstDeleteCusId1.getText())){
+                new Alert(Alert.AlertType.ERROR, "There is no such Customer associated with the id ").show();
+            }else {
+                boolean b = customerBo.existCustomer(tstDeleteCusId1.getText());
+                if (!b) {
+                    new Alert(Alert.AlertType.ERROR, " Please Check Id " + tstDeleteCusId1.getText()).show();
+                }
+                search = customerBo.search(tstDeleteCusId1.getText());
+                txtDeleteCustomerTitle1.setText(search.getCusTitle());
+                txtDeleteCusName1.setText(search.getName());
+                txtDeleteCusAddress1.setText(search.getAddress());
+                txtDeleteCustomerCity1.setText(search.getCity());
+                txtDeleteCustomerProvince1.setText(search.getProvince());
+                txtDeleteCustomerPostalCode1.setText(search.getPostalCode());
             }
-            search = customerBo.search(tstDeleteCusId1.getText());
-            txtDeleteCustomerTitle1.setText(search.getCusTitle());
-            txtDeleteCusName1.setText(search.getName());
-            txtDeleteCusAddress1.setText(search.getAddress());
-            txtDeleteCustomerCity1.setText(search.getCity());
-            txtDeleteCustomerProvince1.setText(search.getProvince());
-            txtDeleteCustomerPostalCode1.setText(search.getPostalCode());
         } catch (SQLException throwables) {
             new Alert(Alert.AlertType.WARNING, "Something Went Wrong Please Check Id").show();
             throwables.printStackTrace();
@@ -237,8 +305,11 @@ public class CustomerFormController {
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/" + location + ".fxml"))));
         stage.setTitle("Admin Form");
     }
-
     public void BtnPLaceOrderOnAction(ActionEvent actionEvent) throws IOException {
         setUI("PlaceOrderForm");
     }
+    boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
+      return  customerBo.existCustomer(id);
+
+}
 }

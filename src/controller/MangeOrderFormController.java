@@ -1,6 +1,7 @@
 package controller;
 
 import TM.OrderTm;
+import bo.custom.CustomerBo;
 import bo.custom.ItemBo;
 import bo.custom.OrderBo;
 import bo.custom.OrderDetailsBo;
@@ -65,6 +66,7 @@ public class MangeOrderFormController {
     OrderDetailsBo orderDetailsDo= (OrderDetailsBo) BOFactory.getBoFactory().getBo(BOFactory.BoTypes.ORDERDETAILS);
 //    OrderDetailsDo orderDetailsDo= (OrderDetailsDo) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDERDETAILS);
      OrderBo orderDao= (OrderBo) BOFactory.getBoFactory().getBo(BOFactory.BoTypes.ORDER);
+     CustomerBo customerBo= (CustomerBo) BOFactory.getBoFactory().getBo(BOFactory.BoTypes.CUSTOMER);
     ItemBo itemBo= (ItemBo) BOFactory.getBoFactory().getBo(BOFactory.BoTypes.ITEM);
     public void initialize(){
        colIrderId.setCellValueFactory(new PropertyValueFactory<>("oid"));
@@ -81,14 +83,27 @@ public class MangeOrderFormController {
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/" + location + ".fxml"))));
         stage.setTitle("AdminForm");
     }
-    public void ModifyOrderDetailsOnAction(ActionEvent actionEvent) {
+    public void ModifyOrderDetailsOnAction(ActionEvent actionEvent){
         String OrderCode= txtUpdateOrerCode.getText();
         String ItemCode= txtItemCode.getText();
         int qty= Integer.parseInt(txtUpdateQty.getText());
         double discount=Double.parseDouble( txtUpdateItemDiscount.getText()) ;
         double total= Double.parseDouble(txtUpdateTotal.getText());
-
-
+         if(txtUpdateItemDiscount.getText().matches("^[0-9]$^")){
+            new Alert(Alert.AlertType.ERROR, "Discount").show();
+            txtUpdateItemDiscount.requestFocus();
+            return;
+        }
+         else if(txtUpdateQty.getText().matches("^[0-9]$^")){
+             new Alert(Alert.AlertType.ERROR, "Qty").show();
+             txtUpdateQty.requestFocus();
+             return;
+         }
+         else if(txtUpdateTotal.getText().matches("^[0-9]$^")){
+             new Alert(Alert.AlertType.ERROR, "Total").show();
+             txtUpdateQty.requestFocus();
+             return;
+         }
         try {
             orderDetailsDo.updateOrderdetails( new OrderDetailsDto(
                     OrderCode,ItemCode,qty,discount,total
@@ -103,12 +118,17 @@ public class MangeOrderFormController {
     }
     public void txtSearchItemOnAction(ActionEvent actionEvent)  {
         try {
-            OrderDetailsDto search = orderDetailsDo.search(txtSearchOrderId.getText());
-            txtUpdateOrerCode.setText(search.getOid());
-            txtItemCode.setText(search.getItemCode());
-            txtUpdateQty.setText(String.valueOf(search.getQty()));
-            txtUpdateItemDiscount.setText(String.valueOf(search.getDiscount()));
-            txtUpdateTotal.setText(String.valueOf(search.getTotalPrice()));
+            if(!existOrder(txtSearchOrderId.getText())){
+                new Alert(Alert.AlertType.ERROR, " Please Check Id "+ txtSearchOrderId.getText()).show();
+            }
+            else {
+                OrderDetailsDto search = orderDetailsDo.search(txtSearchOrderId.getText());
+                txtUpdateOrerCode.setText(search.getOid());
+                txtItemCode.setText(search.getItemCode());
+                txtUpdateQty.setText(String.valueOf(search.getQty()));
+                txtUpdateItemDiscount.setText(String.valueOf(search.getDiscount()));
+                txtUpdateTotal.setText(String.valueOf(search.getTotalPrice()));
+            }
         } catch (SQLException throwables) {
             new Alert(Alert.AlertType.WARNING,"Please Check Order Id ("+txtSearchOrderId.getText()+")").show();
             throwables.printStackTrace();
@@ -134,10 +154,14 @@ public class MangeOrderFormController {
     }
     public void txtRemoveSearchItemOnAction(ActionEvent actionEvent) {
         try {
-            OrderDto search = orderDao.search(txtSearchRemoveOrderId.getText());
-            txtRemoveOrerCode1.setText(search.getOid());
-            txtRemoveCustomerCode.setText(search.getCustomerId());
-            txtRemoveOrderDate.setText(search.getDate());
+            if(!existOrder(txtSearchRemoveOrderId.getText())){
+                new Alert(Alert.AlertType.ERROR, " Please Check Id "+ txtSearchRemoveOrderId.getText()).show();
+            }else {
+                OrderDto search = orderDao.search(txtSearchRemoveOrderId.getText());
+                txtRemoveOrerCode1.setText(search.getOid());
+                txtRemoveCustomerCode.setText(search.getCustomerId());
+                txtRemoveOrderDate.setText(search.getDate());
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -147,17 +171,33 @@ public class MangeOrderFormController {
 
     public void txtSearchOrderCusIdOnAction(ActionEvent actionEvent) {
         tblSearchOrders.getItems().clear();
+        if(!txtSearchCustomerOrder.getText().matches(("^(C00-)[0-9]{3,5}$"))){
+            new Alert(Alert.AlertType.ERROR, "Id should be at least 3 characters long").show();
+            txtSearchCustomerOrder.requestFocus();
+            return;
+        }
+
         try {
-            ArrayList<OrderDto> allOrder = orderDetailsDo.getAllOrdersByCusId(txtSearchCustomerOrder.getText());
-            for (OrderDto dto:allOrder
-            ) {
-                tblSearchOrders.getItems().add(new OrderTm(dto.getOid(),dto.getDate(),dto.getCustomerId()));
+            if(!existCustomer(txtSearchCustomerOrder.getText())){
+                new Alert(Alert.AlertType.ERROR, " Please Check Id "+ txtSearchCustomerOrder.getText()).show();
+            }else {
+                ArrayList<OrderDto> allOrder = orderDetailsDo.getAllOrdersByCusId(txtSearchCustomerOrder.getText());
+                for (OrderDto dto : allOrder
+                ) {
+                    tblSearchOrders.getItems().add(new OrderTm(dto.getOid(), dto.getDate(), dto.getCustomerId()));
+                }
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+    boolean existCustomer(String id) throws SQLException, ClassNotFoundException {
+      return  customerBo.existCustomer(id);
+    }
+    boolean existOrder(String oid) throws SQLException, ClassNotFoundException {
+      return  orderDao.existOrder(oid);
     }
    /* private void claculateQty(){
         double unitprice=Double.parseDouble(txtunitprice.getText());

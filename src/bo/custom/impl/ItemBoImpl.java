@@ -30,7 +30,7 @@ public class ItemBoImpl implements ItemBo {
 
     @Override
     public boolean existItem(String id) throws SQLException, ClassNotFoundException {
-       return existItem(id);
+       return itemDao.exist(id);
     }
 
     @Override

@@ -18,7 +18,7 @@ public class CustomerDaoIMPL implements CustomerDao {
 
     @Override
     public boolean exist(String id) throws SQLException, ClassNotFoundException {
-       return CrudUtil.executeQuery("SELECT * FROM Customer WHERE id=?",id).next();
+       return CrudUtil.executeQuery("SELECT id FROM Customer WHERE id=?",id).next();
     }
 
     @Override

@@ -55,7 +55,7 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
-                                    <JFXTextField fx:id="txtUpdateOrerCode" editable="false" focusColor="#01040d" layoutX="85.0" layoutY="32.0" prefHeight="25.0" prefWidth="200.0" promptText="OD000" unFocusColor="#1248d2" />
+                                    <JFXTextField fx:id="txtUpdateOrerCode" editable="false" focusColor="#01040d" layoutX="85.0" layoutY="32.0" prefHeight="25.0" prefWidth="200.0" promptText="OID-000" unFocusColor="#1248d2" />
                                     <JFXTextField fx:id="txtItemCode" editable="false" focusColor="#01040d" layoutX="415.0" layoutY="31.0" prefHeight="25.0" prefWidth="235.0" promptText="I00-001" unFocusColor="#1248d2" />
                                     <JFXTextField fx:id="txtUpdateQty" focusColor="#01040d" layoutX="56.0" layoutY="82.0" prefHeight="25.0" prefWidth="157.0" promptText="qty" unFocusColor="#1248d2" />
                                     <Label layoutX="321.0" layoutY="84.0" text="Item Discount :-">

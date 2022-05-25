@@ -109,6 +109,35 @@ public class ItemController {
         String code=  tstSaveItemCode1.getText();
         String description=   txtSaveItemDescription1.getText();
         String packSize=   txtSavePackSize1.getText();
+        if (!description.matches("[A-Za-z0-9 ]+")) {
+            new Alert(Alert.AlertType.ERROR, "Invalid description").show();
+            txtSaveItemDescription1.requestFocus();
+            return;
+        } else if (!txtSaveItemUnitPrice1.getText().matches("^[0-9]+[.]?[0-9]*$")) {
+            new Alert(Alert.AlertType.ERROR, "Invalid unit price").show();
+            txtSaveItemUnitPrice1.requestFocus();
+            return;
+        }
+        else if(code.matches("^(i00-)[0-9]{3,5}$")){
+            new Alert(Alert.AlertType.ERROR, "Invalid Item Code").show();
+            tstSaveItemCode1.requestFocus();
+            return;
+        }
+        else if(txtSaveItemQtyOnHand1.getText().matches("^[0-9]$")){
+            new Alert(Alert.AlertType.ERROR, "Invalid Qty OnHand").show();
+            txtSaveItemQtyOnHand1.requestFocus();
+            return;
+        }
+        else if(txtSaveItemUnitPrice1.getText().matches("^[0-9]{1,9}$")){
+            new Alert(Alert.AlertType.ERROR, "Invalid Unit Price").show();
+            txtSaveItemUnitPrice1.requestFocus();
+            return;
+        }
+        else if(txtSaveItemDiscount.getText().matches("^[0-9]$^")){
+            new Alert(Alert.AlertType.ERROR, "Discount").show();
+            txtSaveItemDiscount.requestFocus();
+            return;
+        }
         int qtyonhandd=   Integer.parseInt( txtSaveItemQtyOnHand1.getText());
         double unitPrice=   Double.parseDouble(txtSaveItemUnitPrice1.getText());
         double discount=Double.parseDouble(txtSaveItemDiscount.getText());
@@ -158,6 +187,35 @@ public class ItemController {
                int qtyonHand=  Integer.parseInt( txtUpdateQtyONHand.getText());
                double unitprice=  Double.parseDouble(txtUpdateUnitiPrice.getText());
                double discount=Double.parseDouble(txtUpdateItemDiscount.getText());
+        if (!description.matches("[A-Za-z0-9 ]+")) {
+            new Alert(Alert.AlertType.ERROR, "Invalid description").show();
+            txtUpdateItemDescription.requestFocus();
+            return;
+        } else if (!txtUpdateUnitiPrice.getText().matches("^[0-9]+[.]?[0-9]*$")) {
+            new Alert(Alert.AlertType.ERROR, "Invalid unit price").show();
+            txtSaveItemUnitPrice1.requestFocus();
+            return;
+        }
+        else if(Code.matches("^(i00-)[0-9]{3,5}$")){
+            new Alert(Alert.AlertType.ERROR, "Invalid Item Code").show();
+            tstSaveItemCode1.requestFocus();
+            return;
+        }
+        else if(txtUpdateUnitiPrice.getText().matches("^[0-9]{1,9}$")){
+            new Alert(Alert.AlertType.ERROR, "Invalid Unit Price").show();
+            txtUpdateUnitiPrice.requestFocus();
+            return;
+        }
+        else if(txtUpdateItemDiscount.getText().matches("^[0-9]$^")){
+            new Alert(Alert.AlertType.ERROR, "Discount").show();
+            txtUpdateItemDiscount.requestFocus();
+            return;
+        }
+        else if(txtSaveItemQtyOnHand1.getText().matches("^[0-9]$")){
+            new Alert(Alert.AlertType.ERROR, "Invalid Qty OnHand").show();
+            txtSaveItemQtyOnHand1.requestFocus();
+            return;
+        }
         try {
            boolean b= itemBo.updateItem(new ItemDto(Code,description,pacSize,qtyonHand,unitprice,discount));
             if(b){
@@ -172,7 +230,7 @@ public class ItemController {
         }
     }
 
-    public void txtSearchItemOnAction(ActionEvent actionEvent) {
+    public void txtSearchItemOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
        /* boolean b= itemBo.existItem(txtSearchItem.getText());
 
         ResultSet rst = CrudUtil.executeQuery("SELECT * FROM item WHERE code=?", txtSearchItem.getText());
@@ -186,17 +244,25 @@ public class ItemController {
           else{
               new Alert(Alert.AlertType.WARNING, "Something Went Wrong Please Check Code " +txtSearchItem.getText()).show();
           }*/
+         if(txtSearchItem.getText().matches("^(i00-)[0-9]{3,5}$")){
+            new Alert(Alert.AlertType.ERROR, "Invalid Item Code").show();
+             txtSearchItem.requestFocus();
+            return;
+        }
 
-        ItemDto search = null;
 
         try {
-                search = itemBo.search(txtSearchItem.getText());
+            if(!existItem(txtSearchItem.getText())){
+                new Alert(Alert.AlertType.ERROR, "There is no such item associated with the id ").show();
+            }else {
+                ItemDto search = itemBo.search(txtSearchItem.getText());
                 txtUpdateItemCode.setText(search.getCode());
                 txtUpdateUnitiPrice.setText(String.valueOf(search.getUnitPrice()));
                 txtUpdateItemPackSize.setText(search.getPackSize());
                 txtUpdateItemDescription.setText((search.getDescription()));
                 txtUpdateQtyONHand.setText(String.valueOf(search.getQtyOnhand()));
                 txtUpdateItemDiscount.setText(String.valueOf(search.getDiscount()));
+            }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -253,15 +319,21 @@ public class ItemController {
         else{
             new Alert(Alert.AlertType.WARNING, "Something Went Wrong Please Check Code").show();
         }*/
-
-        try {
-             ItemDto search = itemBo.search(tstDeletedCode.getText());
-                txtDeleteItemUnitPrice.setText(String.valueOf(search.getUnitPrice()));
-                txtDeletePackSize.setText(search.getPackSize());
-                txtDeletetemDescription.setText(search.getDescription());
-                txtDeletetemQtyOnHand.setText(String.valueOf(search.getQtyOnhand()));
-                txtDeletetemDisount.setText(String.valueOf(search.getDiscount()));
-
+        if(tstDeletedCode.getText().matches("^(i00-)[0-9]{3,5}$")){
+            new Alert(Alert.AlertType.ERROR, "Invalid Item Code").show();
+            tstDeletedCode.requestFocus();
+            return;
+        }
+        try { if(!existItem(tstDeletedCode.getText())){
+            new Alert(Alert.AlertType.ERROR, "There is no such item associated with the id ").show();
+        }else {
+            ItemDto search = itemBo.search(tstDeletedCode.getText());
+            txtDeleteItemUnitPrice.setText(String.valueOf(search.getUnitPrice()));
+            txtDeletePackSize.setText(search.getPackSize());
+            txtDeletetemDescription.setText(search.getDescription());
+            txtDeletetemQtyOnHand.setText(String.valueOf(search.getQtyOnhand()));
+            txtDeletetemDisount.setText(String.valueOf(search.getDiscount()));
+        }
         } catch (SQLException throwables) {
             new Alert(Alert.AlertType.WARNING, "Something Went Wrong Please Check Code "+tstDeletedCode.getText()).show();
             throwables.printStackTrace();
@@ -271,6 +343,6 @@ public class ItemController {
 
     }
     boolean existItem(String id) throws SQLException, ClassNotFoundException {
-     return   itemBo.existItem(id);
+     return itemBo.existItem(id);
     }
 }

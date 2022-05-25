@@ -18,7 +18,8 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public boolean exist(String id) throws SQLException, ClassNotFoundException {
-        return CrudUtil.executeQuery("SELECT * FROM item WHERE code=?",id).next();
+        return CrudUtil.executeQuery("SELECT code FROM item WHERE code=?",id).next();
+
     }
 
     @Override
