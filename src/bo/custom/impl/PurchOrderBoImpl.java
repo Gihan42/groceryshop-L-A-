@@ -39,7 +39,8 @@ public class PurchOrderBoImpl implements PurchOrderBo {
     @Override
     public boolean purchaseOrder(OrderDto orderDTO, ArrayList<OrderDetailsDto> orderDetailDTO) throws SQLException, ClassNotFoundException {
         Connection connection = DBConnection.getDbConnection().getConnection();
-        connection.setAutoCommit(false);
+       connection.setAutoCommit(false);
+        ArrayList<OrderDetailsDto>details=new ArrayList<>();
         boolean isOrderAdded = orderDAO.save(new Order(orderDTO.getOid(),orderDTO.getDate(),orderDTO.getCustomerId(),orderDTO.getTotal()));
 
         if(!isOrderAdded){
@@ -49,18 +50,19 @@ public class PurchOrderBoImpl implements PurchOrderBo {
         }
         for (OrderDetailsDto dto : orderDetailDTO) {
             boolean isOderDetailsSaved = orderDetailsDAO.save(new OrderDetail(dto.getOid(),dto.getItemCode(),dto.getQty(),dto.getDiscount(),dto.getTotalPrice()));
-            itemDAO.updateItemQty(dto.getItemCode(),dto.getQty());
             if (!isOderDetailsSaved){
                 connection.rollback();
                 connection.setAutoCommit(true);
                 return false;
             }
+            itemDAO.updateItemQty(dto.getItemCode(),dto.getQty());
         }
-
         connection.commit();
         connection.setAutoCommit(true);
         return true;
     }
+
+
     @Override
     public CustomerDto searchCustomer(String id) throws SQLException, ClassNotFoundException {
         Customer search = dto.search(id);

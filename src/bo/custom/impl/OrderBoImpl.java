@@ -4,8 +4,11 @@ import CrudUtil.CrudUtil;
 import bo.custom.OrderBo;
 import dao.DAOFactory;
 import dao.custom.OrderDao;
+import dao.custom.OrderDetailsDo;
 import dao.custom.impl.OrderDaoImpl;
 import dto.OrderDto;
+import dto.ReportDto;
+import entity.Custom;
 import entity.Order;
 
 import java.sql.ResultSet;
@@ -14,6 +17,7 @@ import java.util.ArrayList;
 
 public class OrderBoImpl implements OrderBo {
     OrderDao orderDao= (OrderDao) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDER);
+    OrderDetailsDo orderDetailsDo= (OrderDetailsDo) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDERDETAILS);
     @Override
     public ArrayList<OrderDto> getAllOrder() throws SQLException, ClassNotFoundException {
         ArrayList<OrderDto>arrayList=new ArrayList<>();
@@ -55,5 +59,15 @@ public class OrderBoImpl implements OrderBo {
         return new OrderDto(search.getOid(),search.getDate(),search.getCustomerId(),search.getTotal());
     }
 
-
+    public ArrayList<ReportDto> generateReport(int code) throws  SQLException, ClassNotFoundException{
+        ArrayList<Custom> rpt = orderDetailsDo.generateReport(code);
+        ArrayList<ReportDto> report = new ArrayList<>();
+        if(rpt!=null){
+            for (Custom customOrder : rpt) {
+                report.add(new ReportDto(customOrder.getItemCode(),customOrder.getTotalPrice(),customOrder.getOrderQty()));
+            }
+            return report;
+        }
+        return null;
+    }
 }

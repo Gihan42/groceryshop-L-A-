@@ -2,8 +2,10 @@
 
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
@@ -11,102 +13,75 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="SystemReportContext" prefHeight="507.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SystemReportFormController">
+<AnchorPane fx:id="SystemReportContext" prefHeight="574.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SystemReportFormController">
    <children>
-      <TabPane prefHeight="474.0" prefWidth="801.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="527.0" prefWidth="996.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Daily Income">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="454.0" prefWidth="801.0" style="-fx-background-color: white;">
-                     <children>
-                        <Label layoutX="328.0" layoutY="14.0" prefHeight="43.0" prefWidth="238.0" text="Daily Income" textFill="#0e4588">
-                           <font>
-                              <Font size="29.0" />
-                           </font>
-                        </Label>
-                        <Separator layoutX="133.0" layoutY="55.0" prefHeight="4.0" prefWidth="618.0" />
-                        <DatePicker fx:id="datePicker" layoutX="34.0" layoutY="79.0" prefHeight="25.0" prefWidth="197.0" promptText="0000/00/00" />
-                        <TableView fx:id="tblDaileIncomeTable" layoutX="14.0" layoutY="124.0" prefHeight="311.0" prefWidth="384.0">
-                          <columns>
-                            <TableColumn fx:id="DColOrderId" prefWidth="126.33331298828125" text="Order Id" />
-                              <TableColumn fx:id="DCOLdATE" prefWidth="126.33331298828125" text="Date" />
-                              <TableColumn fx:id="dcolCustomerId" prefWidth="126.33331298828125" text="Customer Id" />
-                          </columns>
-                        </TableView>
-                        <Button fx:id="btnload" layoutX="260.0" layoutY="79.0" mnemonicParsing="false" onAction="#datePickerOnAction" prefHeight="25.0" prefWidth="144.0" style="-fx-background-color: orange;" text="Load" textFill="WHITE" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Monthly Income">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
             <Tab text="Most Moveble Item &amp; Least Movable Item">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tblMostMovebleItem" layoutY="84.0" prefHeight="248.0" prefWidth="518.0">
+                        <TableView fx:id="tblMostMovebleItem" layoutX="26.0" layoutY="85.0" prefHeight="287.0" prefWidth="680.0">
                            <columns>
-                              <TableColumn fx:id="colMOrderId" prefWidth="128.33331298828125" text="Ordder Id" />
-                              <TableColumn fx:id="colMItemCode" prefWidth="128.33331298828125" text="Item Code" />
-                              <TableColumn fx:id="colMQty" prefWidth="136.0" text="Qty" />
-                              <TableColumn fx:id="colMDiscount" prefWidth="136.0" text="Discount" />
+                              <TableColumn fx:id="colMOrderId" prefWidth="197.66665649414062" text="Ordder Id" />
+                              <TableColumn fx:id="colMItemCode" prefWidth="152.33334350585938" text="Item Code" />
+                              <TableColumn fx:id="colMQty" prefWidth="161.0" text="Qty" />
+                              <TableColumn fx:id="colMDiscount" prefWidth="168.3333740234375" text="Discount" />
                            </columns>
                         </TableView>
-                        <Label fx:id="lblTitle" layoutX="241.0" layoutY="23.0" prefHeight="43.0" prefWidth="281.0" text="Most Moveble Item" textFill="#0e4588">
+                        <Label fx:id="lblTitle" layoutX="399.0" layoutY="14.0" prefHeight="43.0" prefWidth="281.0" text="Most Moveble Item" textFill="#0e4588">
                            <font>
                               <Font size="29.0" />
                            </font>
                         </Label>
-                        <Separator layoutX="123.0" layoutY="65.0" prefHeight="0.0" prefWidth="499.0" />
-                        <JFXTextField fx:id="txtMDescription" layoutX="631.0" layoutY="136.0" prefHeight="25.0" prefWidth="156.0" promptText="Description " />
-                        <JFXTextField fx:id="txtMItemCode" layoutX="217.0" layoutY="343.0" prefHeight="25.0" prefWidth="156.0" promptText="Item Code" />
-                        <JFXTextField fx:id="txtMQty" layoutX="415.0" layoutY="343.0" prefHeight="25.0" prefWidth="99.0" promptText="Qty" />
-                        <JFXTextField fx:id="txtMDiscount" layoutX="14.0" layoutY="406.0" prefHeight="25.0" prefWidth="88.0" promptText="Discount" />
-                        <Label layoutX="108.0" layoutY="400.0" prefHeight="38.0" prefWidth="31.0" text="\%">
+                        <Separator layoutX="176.0" layoutY="55.0" prefHeight="0.0" prefWidth="645.0" />
+                        <JFXTextField fx:id="txtMDescription" layoutX="826.0" layoutY="132.0" prefHeight="25.0" prefWidth="156.0" promptText="Description " />
+                        <JFXTextField fx:id="txtMItemCode" layoutX="243.0" layoutY="410.0" prefHeight="25.0" prefWidth="156.0" promptText="Item Code" />
+                        <JFXTextField fx:id="txtMQty" layoutX="459.0" layoutY="410.0" prefHeight="25.0" prefWidth="99.0" promptText="Qty" />
+                        <JFXTextField fx:id="txtMDiscount" layoutX="618.0" layoutY="410.0" prefHeight="25.0" prefWidth="88.0" promptText="Discount" />
+                        <Label layoutX="712.0" layoutY="404.0" prefHeight="38.0" prefWidth="31.0" text="\%">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label layoutX="576.0" layoutY="83.0" prefHeight="28.0" prefWidth="109.0" text="Item Details" textFill="#ef9205">
+                        <Label layoutX="771.0" layoutY="79.0" prefHeight="28.0" prefWidth="109.0" text="Item Details" textFill="#ef9205">
                            <font>
                               <Font size="19.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="txtMPackSize" layoutX="631.0" layoutY="174.0" prefHeight="25.0" prefWidth="156.0" promptText="Pack Size" />
-                        <JFXTextField fx:id="txtMQtyoHand" layoutX="631.0" layoutY="210.0" prefHeight="25.0" prefWidth="156.0" promptText="Qty OnHand" />
-                        <JFXTextField fx:id="txtMUnitPrice" layoutX="631.0" layoutY="246.0" prefHeight="25.0" prefWidth="156.0" promptText="Unit Price" />
-                        <Label layoutX="525.0" layoutY="136.0" prefHeight="22.0" prefWidth="106.0" text="Description :" textFill="#054770">
+                        <JFXTextField fx:id="txtMPackSize" layoutX="826.0" layoutY="170.0" prefHeight="25.0" prefWidth="156.0" promptText="Pack Size" />
+                        <JFXTextField fx:id="txtMQtyoHand" layoutX="826.0" layoutY="206.0" prefHeight="25.0" prefWidth="156.0" promptText="Qty OnHand" />
+                        <JFXTextField fx:id="txtMUnitPrice" layoutX="826.0" layoutY="242.0" prefHeight="25.0" prefWidth="156.0" promptText="Unit Price" />
+                        <Label layoutX="720.0" layoutY="132.0" prefHeight="22.0" prefWidth="106.0" text="Description :" textFill="#054770">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label layoutX="525.0" layoutY="174.0" prefHeight="22.0" prefWidth="106.0" text="Pack Size :" textFill="#054770">
+                        <Label layoutX="720.0" layoutY="170.0" prefHeight="22.0" prefWidth="106.0" text="Pack Size :" textFill="#054770">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label layoutX="523.0" layoutY="210.0" prefHeight="22.0" prefWidth="106.0" text="QTY On Hand :" textFill="#054770">
+                        <Label layoutX="718.0" layoutY="206.0" prefHeight="22.0" prefWidth="106.0" text="QTY On Hand :" textFill="#054770">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="523.0" layoutY="246.0" prefHeight="26.0" prefWidth="125.0" text="Unit Prise : Rs " textFill="#054770">
+                        <Label layoutX="718.0" layoutY="242.0" prefHeight="26.0" prefWidth="125.0" text="Unit Prise : Rs " textFill="#054770">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="txtMOrderId" layoutX="14.0" layoutY="343.0" prefHeight="25.0" prefWidth="156.0" promptText="Order Id" />
-                        <Button layoutX="638.0" layoutY="309.0" mnemonicParsing="false" onAction="#leastMovableItemOnAction" prefHeight="47.0" prefWidth="142.0" style="-fx-background-color: green;" text="Least Movable" textFill="WHITE">
+                        <JFXTextField fx:id="txtMOrderId" layoutX="27.0" layoutY="408.0" prefHeight="25.0" prefWidth="156.0" promptText="Order Id" />
+                        <Button layoutX="833.0" layoutY="305.0" mnemonicParsing="false" onAction="#leastMovableItemOnAction" prefHeight="47.0" prefWidth="142.0" style="-fx-background-color: green;" text="Least Movable" textFill="WHITE">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Button>
-                        <Button layoutX="638.0" layoutY="377.0" mnemonicParsing="false" onAction="#MostMovableItemOnAction" prefHeight="47.0" prefWidth="142.0" style="-fx-background-color: orange;" text="Most Moveble " textFill="WHITE">
+                        <Button layoutX="833.0" layoutY="373.0" mnemonicParsing="false" onAction="#MostMovableItemOnAction" prefHeight="47.0" prefWidth="142.0" style="-fx-background-color: orange;" text="Most Moveble " textFill="WHITE">
                            <font>
                               <Font size="17.0" />
                            </font>
@@ -115,9 +90,71 @@
                   </AnchorPane>
                </content>
             </Tab>
+            <Tab text="Monthly,Aneual,Daily  Income">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="507.0" prefWidth="801.0" style="-fx-background-color: white;">
+                     <children>
+                        <Label layoutX="474.0" prefHeight="43.0" prefWidth="238.0" text="Monthly Income" textFill="#0e4588">
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutX="59.0" layoutY="46.0" prefHeight="3.0" prefWidth="907.0" />
+                        <BarChart fx:id="barChartForReports" layoutX="189.0" layoutY="89.0" prefHeight="400.0" prefWidth="786.0">
+                          <xAxis>
+                            <CategoryAxis label="items" side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis label="units" side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                        <Button layoutX="301.0" layoutY="64.0" mnemonicParsing="false" onAction="#DailyOnAction" prefHeight="25.0" prefWidth="165.0" style="-fx-background-color: #66b3ff;" text="Daily ">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button layoutX="531.0" layoutY="64.0" mnemonicParsing="false" onAction="#MonthlyOnAction" prefHeight="25.0" prefWidth="165.0" style="-fx-background-color: #ff944d;" text="Monthly">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button layoutX="768.0" layoutY="64.0" mnemonicParsing="false" onAction="#AnnualyOnAction" prefHeight="25.0" prefWidth="165.0" style="-fx-background-color: #2eb82e;" text="Annualy">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="171.0" layoutX="6.0" layoutY="88.0" stroke="BLACK" strokeType="INSIDE" width="164.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="171.0" layoutX="5.0" layoutY="289.0" stroke="BLACK" strokeType="INSIDE" width="157.0" />
+                        <Label layoutX="50.0" layoutY="88.0" text="Total">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="50.0" layoutY="289.0" text="Sales">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblTotal" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="155.0" prefHeight="38.0" prefWidth="159.0" text="000">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblSales" alignment="CENTER" contentDisplay="CENTER" layoutX="9.0" layoutY="344.0" prefHeight="38.0" prefWidth="159.0" text="000">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
-      <Button fx:id="HomeBtn" layoutX="-4.0" layoutY="474.0" mnemonicParsing="false" onAction="#HomeButtonOnAction" prefHeight="38.0" prefWidth="809.0" style="-fx-background-color: #0e4588;" text="🏠     Home" textFill="#efefef">
+      <Button fx:id="HomeBtn" layoutY="546.0" mnemonicParsing="false" onAction="#HomeButtonOnAction" prefHeight="38.0" prefWidth="1006.0" style="-fx-background-color: #0e4588;" text="🏠     Home" textFill="#efefef">
          <font>
             <Font size="17.0" />
          </font>

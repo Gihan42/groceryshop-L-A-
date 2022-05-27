@@ -3,6 +3,7 @@ package controller;
 import TM.LeastMovableMostMovbleTm;
 import TM.OrderDailyTm;
 import bo.custom.ItemBo;
+import bo.custom.OrderBo;
 import bo.custom.SystemReportBo;
 import bo.custom.bo.BOFactory;
 import bo.custom.impl.ItemBoImpl;
@@ -11,9 +12,14 @@ import com.jfoenix.controls.JFXTextField;
 import dao.DAOFactory;
 import dao.custom.OrderDao;
 import dao.custom.impl.OrderDaoImpl;
+import dto.ReportDto;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -56,14 +62,19 @@ public class SystemReportFormController {
 
     public Label lblTitle;
 
+    public Label lblTotal;
+    public Label lblSales;
+    public BarChart barChartForReports;
 
-    OrderDao orderDao = (OrderDao) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.ORDER);
+
     SystemReportBo systemReportBo= (SystemReportBo) BOFactory.getBoFactory().getBo(BOFactory.BoTypes.SYSTEM_REPORT);
     ItemBo itemBo= (ItemBo) BOFactory.getBoFactory().getBo(BOFactory.BoTypes.ITEM);
+    OrderBo orderBo= (OrderBo) BOFactory.getBoFactory().getBo(BOFactory.BoTypes.ORDER);
+
     public void initialize() {
-        DColOrderId.setCellValueFactory(new PropertyValueFactory<>("oid"));
+   /*   /  DColOrderId.setCellValueFactory(new PropertyValueFactory<>("oid"));
         DCOLdATE.setCellValueFactory(new PropertyValueFactory<>("date"));
-        dcolCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        dcolCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));*/
         getAllMostMovableItem();
         colMOrderId.setCellValueFactory(new PropertyValueFactory<>("oid"));
         colMItemCode.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
@@ -94,6 +105,7 @@ public class SystemReportFormController {
                         order.getDate(),
                         order.getCustomerId()
                 ));
+
             }
 
         } catch (SQLException throwables) {
@@ -117,6 +129,7 @@ public class SystemReportFormController {
     public void datePickerOnAction(ActionEvent actionEvent) {
         tblDaileIncomeTable.getItems().clear();
         dailyInCome();
+
     }
     public void getAllMostMovableItem(){
         try {
@@ -168,5 +181,39 @@ public class SystemReportFormController {
         tblMostMovebleItem.getItems().clear();
         lblTitle.setText(" Most Movable Item");
         getAllMostMovableItem();
+    }
+
+    public void DailyOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        generateReport(2);
+    }
+    private void generateReport(int num) throws SQLException, ClassNotFoundException {
+        barChartForReports.getData().clear();
+        double tot=0;
+        int item=0;
+        XYChart.Series totItems = new XYChart.Series<String,Number>();
+        totItems.setName("items");
+
+        XYChart.Series sales = new XYChart.Series<String,Number>();
+        totItems.setName("sales");
+
+        ArrayList<ReportDto> report =  orderBo.generateReport(num);
+        if(report!=null){
+            for (ReportDto dto : report) {
+                totItems.getData().add(new XYChart.Data<String,Number>(dto.getItemCode(), dto.getTotalItemsSold()));
+                sales.getData().add(new XYChart.Data<String,Number>(dto.getItemCode(), dto.getTotalEarned()));
+                tot+=dto.getTotalEarned();
+                item+=dto.getTotalItemsSold();
+            }
+        }
+        lblTotal.setText(String.valueOf(tot));
+        lblSales.setText(String.valueOf(item));
+        barChartForReports.getData().addAll(totItems,sales);
+    }
+    public void MonthlyOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        generateReport(1);
+    }
+
+    public void AnnualyOnAction(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+        generateReport(3);
     }
 }

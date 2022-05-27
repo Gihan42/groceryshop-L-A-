@@ -3,6 +3,8 @@ package dao.custom.impl;
 import CrudUtil.CrudUtil;
 import dao.custom.OrderDetailsDo;
 import dto.OrderDetailsDto;
+import dto.ReportDto;
+import entity.Custom;
 import entity.OrderDetail;
 
 import java.sql.ResultSet;
@@ -54,6 +56,34 @@ public class OrderDetailsDoImpl implements OrderDetailsDo {
 
     @Override
     public String genarateId() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+
+    @Override
+    public ArrayList<Custom> generateReport(int code) throws SQLException, ClassNotFoundException {
+        ArrayList<Custom> report = new ArrayList<>();
+        if(code==0){
+            ResultSet rst = CrudUtil.executeQuery("CALL DAILY_REPORT()");
+            while(rst.next()){
+                report.add(new Custom(rst.getString(1),rst.getDouble(2),rst.getInt(3)));
+            }
+            return report;
+        }
+        else if(code==1){
+            ResultSet rst = CrudUtil.executeQuery("CALL MONTHLY_REPORT()");
+            while(rst.next()){
+                report.add(new Custom(rst.getString(1),rst.getDouble(2),rst.getInt(3)));
+            }
+            return report;
+        }
+        else if(code==2){
+            ResultSet rst = CrudUtil.executeQuery("CALL ANNUAL_REPORT()");
+            while(rst.next()){
+                report.add(new Custom(rst.getString(1),rst.getDouble(2),rst.getInt(3)));
+            }
+            return report;
+        }
         return null;
     }
 }

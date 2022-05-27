@@ -8,5 +8,4 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface OrderDao extends CrudDao<Order,String> {
-
 }
